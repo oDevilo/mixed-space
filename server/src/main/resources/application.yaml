@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: @profiles.active@
+  application:
+    name: mixed-space
+  threads:
+    virtual:
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  web:
+    resources:
+      static-locations: "file:./storage/"
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-test-query: SELECT 1
+      connection-init-sql: set names utf8mb4
+
+# mybatis-plus:
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  type-aliases-package: io.devil.mixed.dao.table
+
+# log
+logging:
+  config: classpath:log4j2.xml
