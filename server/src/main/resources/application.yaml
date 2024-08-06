@@ -12,7 +12,9 @@ spring:
       max-request-size: 100MB
   web:
     resources:
-      static-locations: "file:./storage/"
+      static-locations: ["file:./storage/", "classpath:/static/", "classpath:/index.html"]
+#  mvc:
+#    static-path-pattern: /static/**
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:

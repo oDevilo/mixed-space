@@ -128,6 +128,7 @@
             <resource>
                 <directory>src/main/resources/static</directory>
                 <filtering>false</filtering> <!-- 防止过滤字体等二进制文件 -->
+                <targetPath>static/</targetPath>
             </resource>
             <resource>
                 <directory>src/main/resources-${profiles.active}</directory>

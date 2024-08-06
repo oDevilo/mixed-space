@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -58,4 +59,11 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns("/api/v1/health/**");
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
+//        registry.addResourceHandler("/favicon.ico").addResourceLocations("classpath:/favicon.ico");
+//        registry.addResourceHandler("/index.html").addResourceLocations("classpath:/index.html");
+//        registry.addResourceHandler("/storage/**").addResourceLocations("file:/static/");
+    }
 }

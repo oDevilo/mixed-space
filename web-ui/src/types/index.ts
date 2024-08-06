@@ -1,11 +1,11 @@
-export class TagView {
+export interface TagView {
   id: string;
   name: string;
 }
 
-export class ObjectView {
+export interface ObjectView {
   id: string;
   name: string;
-  tags?: Array<TagView>;
-  tagIds?: Array<string>;
+  tags: Array<TagView> | [];
+  tagIds: Array<string> | [];
 }

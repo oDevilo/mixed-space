@@ -70,12 +70,14 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue";
+import {ref, getCurrentInstance} from "vue";
+import {TagView, ObjectView} from "@/types";
 
-const { proxy } = getCurrentInstance()
+const instance = getCurrentInstance()
+const proxy = instance!!.appContext.config.globalProperties
 
-const objects = ref([])
-const tags = ref([])
+const objects = ref<Array<ObjectView>>([])
+const tags = ref<Array<TagView>>([])
 
 const showCreateTagDialog = ref(false)
 const newTagName =ref<string>()
@@ -89,7 +91,7 @@ const object = ref()
 
 const loadTags = () => {
   proxy.$request.get(`/api/v1/tag/search`).then((response: any) => {
-    tags.value = response.data.tags;
+    tags.value = response.data.tags as Array<TagView>;
   });
 }
 
@@ -154,12 +156,11 @@ const closeObjectDetailDialog = () => {
 
 const loadObjects = () => {
   proxy.$request.post(`/api/v1/object/search`, {}).then((response: any) => {
-    const list = response.data.objects
+    const list = response.data.objects as Array<ObjectView>
     list.forEach(o => {
-      o.tagIds = []
-      if (o.tags) {
-        o.tags.forEach(t => o.tagIds.push(t.id))
-      }
+      const tagIds:Array<string> = []
+      o.tags.forEach(t => tagIds.push(t.id))
+      o.tagIds = tagIds
     })
     objects.value = list
   });
