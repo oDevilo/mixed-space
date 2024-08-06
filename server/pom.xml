@@ -117,25 +117,29 @@
 
     <build>
         <finalName>mixed-space</finalName>
-        <!--单元测试时引用src/main/resources下的资源文件-->
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-            </testResource>
-            <testResource>
+        <resources>
+            <resource>
                 <directory>src/main/resources</directory>
-            </testResource>
-            <testResource>
-                <directory>src/main/resources-${profile.name}</directory>
                 <filtering>true</filtering>
-            </testResource>
-        </testResources>
+                <excludes>
+                    <exclude>static/**</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/static</directory>
+                <filtering>false</filtering> <!-- 防止过滤字体等二进制文件 -->
+            </resource>
+            <resource>
+                <directory>src/main/resources-${profiles.active}</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.tzgo.afo.start.Application</mainClass>
+                    <mainClass>io.devil.mixed.WebApplication</mainClass>
+                    <addResources>true</addResources>
                 </configuration>
                 <executions>
                     <execution>
